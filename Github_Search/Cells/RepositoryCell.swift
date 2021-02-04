@@ -11,15 +11,19 @@ class RepositoryCell: UITableViewCell {
 
     @IBOutlet weak var repositoryTitle: UILabel!
     @IBOutlet weak var numberOfStarsTitle: UILabel!
+    @IBOutlet weak var starImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        if selected {
+            let view = UIView()
+            view.backgroundColor = .white
+            selectedBackgroundView = view
+        }
     }
     
 }

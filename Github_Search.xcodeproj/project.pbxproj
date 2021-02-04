@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		340990747F4B8CFEF6C35111 /* Pods_Github_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB245FD7ADE6247E239BA1 /* Pods_Github_Search.framework */; };
+		872A743525CC8D4300FF5AC6 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872A743425CC8D4300FF5AC6 /* HistoryViewModel.swift */; };
+		872A743925CC8D7100FF5AC6 /* RealmDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872A743825CC8D7100FF5AC6 /* RealmDatabase.swift */; };
 		8748591A25CAB43B0091A83A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748591925CAB43B0091A83A /* AppDelegate.swift */; };
 		8748591C25CAB43B0091A83A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748591B25CAB43B0091A83A /* SceneDelegate.swift */; };
 		8748592125CAB43B0091A83A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8748591F25CAB43B0091A83A /* Main.storyboard */; };
@@ -18,7 +20,7 @@
 		8748593F25CABE050091A83A /* APIDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748593E25CABE050091A83A /* APIDecoder.swift */; };
 		8748594225CABE370091A83A /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748594125CABE370091A83A /* URLBuilder.swift */; };
 		8748594525CAC0E60091A83A /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748594425CAC0E60091A83A /* APIError.swift */; };
-		8748595125CAC6070091A83A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748595025CAC6070091A83A /* ViewModel.swift */; };
+		8748595125CAC6070091A83A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748595025CAC6070091A83A /* SearchViewModel.swift */; };
 		8748595625CAE6B80091A83A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748595525CAE6B80091A83A /* TabBarController.swift */; };
 		8748595925CAE6FC0091A83A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748595825CAE6FC0091A83A /* SearchViewController.swift */; };
 		8748595C25CAE7070091A83A /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748595B25CAE7070091A83A /* HistoryViewController.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		1BEB245FD7ADE6247E239BA1 /* Pods_Github_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Github_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		872A743425CC8D4300FF5AC6 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		872A743825CC8D7100FF5AC6 /* RealmDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabase.swift; sourceTree = "<group>"; };
 		8748591625CAB43B0091A83A /* Github_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Github_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8748591925CAB43B0091A83A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8748591B25CAB43B0091A83A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,7 +45,7 @@
 		8748593E25CABE050091A83A /* APIDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDecoder.swift; sourceTree = "<group>"; };
 		8748594125CABE370091A83A /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		8748594425CAC0E60091A83A /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		8748595025CAC6070091A83A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		8748595025CAC6070091A83A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		8748595525CAE6B80091A83A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8748595825CAE6FC0091A83A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8748595B25CAE7070091A83A /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		872A743725CC8D5900FF5AC6 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				872A743825CC8D7100FF5AC6 /* RealmDatabase.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		8748590D25CAB43B0091A83A = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +103,7 @@
 				8748595425CAE6A70091A83A /* TabBarController */,
 				8748593325CAB5F70091A83A /* View Controllers */,
 				8748593A25CABA340091A83A /* APIService */,
+				872A743725CC8D5900FF5AC6 /* Database */,
 				87D59D5225CC06E0005611D4 /* Helpers */,
 				8781915825CB5E620008CB83 /* Cells */,
 				8748593225CAB5EF0091A83A /* Resources */,
@@ -157,7 +170,8 @@
 		8748594F25CAC5F50091A83A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8748595025CAC6070091A83A /* ViewModel.swift */,
+				8748595025CAC6070091A83A /* SearchViewModel.swift */,
+				872A743425CC8D4300FF5AC6 /* HistoryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -321,9 +335,10 @@
 			files = (
 				8748594225CABE370091A83A /* URLBuilder.swift in Sources */,
 				8748595625CAE6B80091A83A /* TabBarController.swift in Sources */,
-				8748595125CAC6070091A83A /* ViewModel.swift in Sources */,
+				8748595125CAC6070091A83A /* SearchViewModel.swift in Sources */,
 				8748595C25CAE7070091A83A /* HistoryViewController.swift in Sources */,
 				87D59D5425CC06F1005611D4 /* ActivityIndicator.swift in Sources */,
+				872A743925CC8D7100FF5AC6 /* RealmDatabase.swift in Sources */,
 				8748593C25CABA410091A83A /* APIService.swift in Sources */,
 				8748593825CAB9EA0091A83A /* RepoModel.swift in Sources */,
 				8748595925CAE6FC0091A83A /* SearchViewController.swift in Sources */,
@@ -332,6 +347,7 @@
 				8748594525CAC0E60091A83A /* APIError.swift in Sources */,
 				8748591A25CAB43B0091A83A /* AppDelegate.swift in Sources */,
 				8748591C25CAB43B0091A83A /* SceneDelegate.swift in Sources */,
+				872A743525CC8D4300FF5AC6 /* HistoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

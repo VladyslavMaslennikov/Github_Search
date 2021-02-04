@@ -9,8 +9,9 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SafariServices
+import RealmSwift
 
-class ViewModel {
+class SearchViewModel {
     private let cellId = "RepositoryCell"
     
     private let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
@@ -18,11 +19,12 @@ class ViewModel {
     private let group = DispatchGroup()
     
     private let apiService = APIService.shared
-    private var count = 1
+    private var pageCount = 1
     
     private var repositories = BehaviorRelay<[Repository]>(value: [])
-    
     private let disposeBag = DisposeBag()
+    
+    private var realmNotificationToken: NotificationToken?
     
     init() { }
     
@@ -30,15 +32,15 @@ class ViewModel {
     private func performRequest(on queue: DispatchQueue, group: DispatchGroup, keyword: String, page: Int) {
         guard !keyword.isEmpty else { return }
         group.enter()
-        self.apiService.fetchRepositories(for: keyword, page: self.count) { catalog in
+        self.apiService.fetchRepositories(for: keyword, page: self.pageCount) { catalog in
             defer {
                 group.leave()
             }
-            print("Retrieving repositories from the page #\(self.count)...")
+            print("Retrieving repositories from the page #\(self.pageCount)...")
             guard let catalog = try? catalog.get().items else { return }
             self.repositories.accept(self.repositories.value + catalog)
-            print("Repositories successfully retrieved from page #\(self.count).\n")
-            self.count += 1
+            print("Repositories successfully retrieved from page #\(self.pageCount).\n")
+            self.pageCount += 1
         }
     }
     
@@ -46,13 +48,13 @@ class ViewModel {
         //make call on queue1
         queue1.async { [weak self] in
             guard let self = self else { return }
-            self.performRequest(on: self.queue1, group: self.group, keyword: keyword, page: self.count)
+            self.performRequest(on: self.queue1, group: self.group, keyword: keyword, page: self.pageCount)
         }
         //wait on queue2 until queue1 tasks are finished
         queue2.async { [weak self] in
             guard let self = self else { return }
             self.group.notify(queue: self.queue2) {
-                self.performRequest(on: self.queue2, group: self.group, keyword: keyword, page: self.count)
+                self.performRequest(on: self.queue2, group: self.group, keyword: keyword, page: self.pageCount)
             }
         }
     }
@@ -62,7 +64,7 @@ class ViewModel {
     }
     
     func reset() {
-        self.count = 1
+        self.pageCount = 1
         self.repositories.accept([])
     }
     
@@ -83,7 +85,7 @@ class ViewModel {
         return cell
     }
     
-    //Bindings
+    //MARK: - Bindings
     func bindTableView(_ tableView: UITableView) {
         repositories.subscribe { _ in
             DispatchQueue.main.async {
@@ -117,5 +119,19 @@ class ViewModel {
         }
     }
     
+    //MARK: - Realm methods
+    func subscribeToDatabaseUpdates(tableView: UITableView) {
+        realmNotificationToken = RealmManager.createTableViewUpdateToken(for: tableView)
+    }
+    
+    func invalidateRealmToken() {
+        realmNotificationToken?.invalidate()
+    }
+    
+    func addRepositoryToHistory(indexPath: Int) {
+        let repo = repositories.value[indexPath]
+        let rmRepo = RmRepository(id: repo.id, name: repo.name)
+        RealmManager.addRepositoryToDatabase(rmRepo)
+    }
 }
 

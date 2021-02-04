@@ -14,7 +14,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     //MARK: - Controller properties
     private let searchBar = UISearchBar()
-    private var viewModel = ViewModel()
+    private var viewModel = SearchViewModel()
     private let activityIndicator = ActivityIndicator()
 
     //MARK: - View Controller Lifecycle
@@ -38,6 +38,10 @@ extension SearchViewController: UISearchBarDelegate {
         navigationController?.navigationBar.shadowImage = UIImage()
         viewModel.bindSearchBar(searchBar)
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
 }
 
 //MARK: - TableView Delegate & DataSource
@@ -57,12 +61,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.keyboardDismissMode = .onDrag
         tableView.rowHeight = UITableView.automaticDimension
         tableView.rowHeight = 50
+        tableView.separatorStyle = .none
         viewModel.registerCell(for: tableView)
         viewModel.bindTableView(tableView)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        viewModel.addRepositoryToHistory(indexPath: indexPath.row)
+        viewModel.addRepositoryToHistory(indexPath: indexPath.row)
         viewModel.openBrowser(controller: self, index: indexPath.row)
     }
 }

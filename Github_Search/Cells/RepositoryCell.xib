@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBY-FI-mdN">
-                        <rect key="frame" x="15" y="15" width="208" height="20"/>
+                        <rect key="frame" x="15" y="15" width="192" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="54x-47-J4g"/>
                         </constraints>
@@ -26,14 +26,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ip0-sM-GPz">
-                        <rect key="frame" x="233" y="15" width="20" height="20"/>
+                        <rect key="frame" x="217" y="15" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="51c-zR-xzq"/>
                             <constraint firstAttribute="height" constant="20" id="Eax-mA-4IY"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ot3-HN-DkD">
-                        <rect key="frame" x="263" y="15" width="42" height="20"/>
+                        <rect key="frame" x="242" y="15" width="68" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="FOe-cT-dpW"/>
                         </constraints>
@@ -43,18 +43,18 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="ot3-HN-DkD" secondAttribute="trailing" constant="15" id="0ge-f5-GgQ"/>
+                    <constraint firstAttribute="trailing" secondItem="ot3-HN-DkD" secondAttribute="trailing" constant="10" id="0ge-f5-GgQ"/>
                     <constraint firstItem="ot3-HN-DkD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="1s0-wW-16i"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wBY-FI-mdN" secondAttribute="trailing" constant="75" id="6JW-bO-Xl4"/>
                     <constraint firstItem="ot3-HN-DkD" firstAttribute="centerY" secondItem="Ip0-sM-GPz" secondAttribute="centerY" id="J2a-qV-X88"/>
                     <constraint firstAttribute="bottom" secondItem="wBY-FI-mdN" secondAttribute="bottom" constant="15" id="N8J-hq-KrG"/>
                     <constraint firstItem="wBY-FI-mdN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="TIn-8h-Qf2"/>
                     <constraint firstItem="wBY-FI-mdN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="UAF-Rn-KpZ"/>
-                    <constraint firstItem="ot3-HN-DkD" firstAttribute="leading" secondItem="Ip0-sM-GPz" secondAttribute="trailing" constant="10" id="UPU-u5-giI"/>
+                    <constraint firstItem="ot3-HN-DkD" firstAttribute="leading" secondItem="Ip0-sM-GPz" secondAttribute="trailing" constant="5" id="UPU-u5-giI"/>
                     <constraint firstItem="Ip0-sM-GPz" firstAttribute="leading" secondItem="wBY-FI-mdN" secondAttribute="trailing" constant="10" id="bES-EP-uz0"/>
                     <constraint firstItem="wBY-FI-mdN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ebw-cs-2pd"/>
                     <constraint firstAttribute="bottom" secondItem="ot3-HN-DkD" secondAttribute="bottom" constant="15" id="gIc-Ou-oDa"/>
-                    <constraint firstItem="wBY-FI-mdN" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.65" id="mcB-YI-jfq"/>
+                    <constraint firstItem="wBY-FI-mdN" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.6" id="mcB-YI-jfq"/>
                     <constraint firstItem="Ip0-sM-GPz" firstAttribute="centerY" secondItem="wBY-FI-mdN" secondAttribute="centerY" id="wrw-5f-sCn"/>
                 </constraints>
             </tableViewCellContentView>
@@ -62,6 +62,7 @@
             <connections>
                 <outlet property="numberOfStarsTitle" destination="ot3-HN-DkD" id="Hcp-eW-8cV"/>
                 <outlet property="repositoryTitle" destination="wBY-FI-mdN" id="SHl-rg-s9R"/>
+                <outlet property="starImage" destination="Ip0-sM-GPz" id="uvI-Kh-P0x"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="78.683035714285708"/>
         </tableViewCell>
