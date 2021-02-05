@@ -34,9 +34,9 @@ class SearchViewModel {
     private func performRequest(group: DispatchGroup, keyword: String, page: Int) {
         guard !keyword.isEmpty else { return }
         group.enter()
-        loadingInProgress = true
         self.apiService.fetchRepositories(for: keyword, page: self.pageCount) { result in
             defer {
+//                Thread.sleep(forTimeInterval: 1)
                 group.leave()
             }
             switch result {
@@ -47,21 +47,21 @@ class SearchViewModel {
             case (.failure(let error)):
                 print(error)
             }
-            self.loadingInProgress = false
         }
     }
     
     private func fetchResults(keyword: String) {
-        //make call on queue1
-        queue1.async { [weak self] in
-            guard let self = self else { return }
-            self.performRequest(group: self.group, keyword: keyword, page: self.pageCount)
-        }
-        //wait on queue2 until queue1 tasks are finished
-        queue2.async { [weak self] in
-            guard let self = self else { return }
-            self.group.notify(queue: self.queue2) {
+        DispatchQueue.global().async {
+            self.loadingInProgress = true
+            self.queue1.async(group: self.group) {
                 self.performRequest(group: self.group, keyword: keyword, page: self.pageCount)
+            }
+            self.group.wait()
+            self.queue2.async(group: self.group) {
+                self.performRequest(group: self.group, keyword: keyword, page: self.pageCount)
+            }
+            self.group.notify(queue: DispatchQueue.main) {
+                self.loadingInProgress = false
             }
         }
     }
