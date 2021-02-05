@@ -10,8 +10,10 @@ import UIKit
 class ActivityIndicator {
     private let animDuration = 0.2
     private var isHidden = true
-    private let indicator = UIActivityIndicatorView()
-    init() { }
+    private let indicator: UIActivityIndicatorView
+    init(indicator: UIActivityIndicatorView = UIActivityIndicatorView()) {
+        self.indicator = indicator
+    }
     
     func addIndicator(to controller: UIViewController) {
         let origin = CGPoint(x: (controller.view.frame.size.width / 2), y: controller.view.frame.height - 100)
@@ -41,7 +43,6 @@ class ActivityIndicator {
     func triggerUpdateBySwipe(for scrollView: UIScrollView, closure: () -> ()) {
         let currentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        
         if maximumOffset - currentOffset <= -80.0 {
             callIndicator()
             closure()

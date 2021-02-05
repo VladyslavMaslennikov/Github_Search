@@ -16,17 +16,14 @@ class SearchViewController: UIViewController {
     private let searchBar = UISearchBar()
     private var viewModel = SearchViewModel()
     private let activityIndicator = ActivityIndicator()
-
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
         setupTableView()
         activityIndicator.addIndicator(to: self)
-        
     }
 }
-
 //MARK: - SearchBar Setup
 extension SearchViewController: UISearchBarDelegate {
     private func setupSearchBar() {
@@ -75,6 +72,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - ScrollView pull down to refresh
 extension SearchViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let inProgress = viewModel.checkIfLoadingInProgress()
+        guard !inProgress else { return }
         activityIndicator.triggerUpdateBySwipe(for: scrollView) { [weak self] in
             guard let text = self?.searchBar.text else { return }
             viewModel.searchForRepositories(in: text)

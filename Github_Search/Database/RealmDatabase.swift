@@ -11,7 +11,7 @@ import RealmSwift
 @objcMembers class RmRepository: Object {
     dynamic var name: String = ""
     dynamic var id: Int = 0
-    dynamic var dateSeen = Date()
+    dynamic var dateSeen: Date = Date.distantPast
     convenience init(id: Int, name: String) {
         self.init()
         self.id = id

@@ -8,10 +8,8 @@
 import UIKit
 
 class HistoryViewController: UIViewController {
-    
     @IBOutlet weak var tableView: UITableView!
     private let viewModel = HistoryVM()
-    
     //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

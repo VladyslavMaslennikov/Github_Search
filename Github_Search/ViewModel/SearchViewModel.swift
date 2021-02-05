@@ -26,21 +26,28 @@ class SearchViewModel {
     
     private var realmNotificationToken: NotificationToken?
     
+    private var loadingInProgress = true
+    
     init() { }
     
     //MARK: - Queues
-    private func performRequest(on queue: DispatchQueue, group: DispatchGroup, keyword: String, page: Int) {
+    private func performRequest(group: DispatchGroup, keyword: String, page: Int) {
         guard !keyword.isEmpty else { return }
         group.enter()
-        self.apiService.fetchRepositories(for: keyword, page: self.pageCount) { catalog in
+        loadingInProgress = true
+        self.apiService.fetchRepositories(for: keyword, page: self.pageCount) { result in
             defer {
                 group.leave()
             }
-            print("Retrieving repositories from the page #\(self.pageCount)...")
-            guard let catalog = try? catalog.get().items else { return }
-            self.repositories.accept(self.repositories.value + catalog)
-            print("Repositories successfully retrieved from page #\(self.pageCount).\n")
-            self.pageCount += 1
+            switch result {
+            case (.success(let catalog)):
+                self.repositories.accept(self.repositories.value + catalog.items)
+                print("Repositories successfully retrieved from page #\(self.pageCount).\n")
+                self.pageCount += 1
+            case (.failure(let error)):
+                print(error)
+            }
+            self.loadingInProgress = false
         }
     }
     
@@ -48,13 +55,13 @@ class SearchViewModel {
         //make call on queue1
         queue1.async { [weak self] in
             guard let self = self else { return }
-            self.performRequest(on: self.queue1, group: self.group, keyword: keyword, page: self.pageCount)
+            self.performRequest(group: self.group, keyword: keyword, page: self.pageCount)
         }
         //wait on queue2 until queue1 tasks are finished
         queue2.async { [weak self] in
             guard let self = self else { return }
             self.group.notify(queue: self.queue2) {
-                self.performRequest(on: self.queue2, group: self.group, keyword: keyword, page: self.pageCount)
+                self.performRequest(group: self.group, keyword: keyword, page: self.pageCount)
             }
         }
     }
@@ -117,6 +124,10 @@ class SearchViewModel {
             let vc = SFSafariViewController(url: url, configuration: config)
             controller.present(vc, animated: true)
         }
+    }
+    
+    func checkIfLoadingInProgress() -> Bool {
+        return loadingInProgress
     }
     
     //MARK: - Realm methods
