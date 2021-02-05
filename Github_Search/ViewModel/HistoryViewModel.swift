@@ -39,15 +39,3 @@ class HistoryVM {
         token?.invalidate()
     }
 }
-
-//Date extension
-extension Date {
-    func convertToString() -> String {
-        let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "en")
-//        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-        let dateString = dateFormatter.string(from: self)
-        return dateString
-    }
-}
